@@ -13,6 +13,8 @@ jobs:
       - IN: shipdemo-img-gcr
       - IN: shipdemo-img-options-gke-test
       - TASK: managed
+    flags:
+      - gke-loadbalancer
 
 # TEST deployment to Amazon ECS
   - shipdemo-deploy-gke-test
@@ -22,6 +24,9 @@ jobs:
       - IN: shipdemo-params-gke-test
       - IN: shipdemo-cluster-gke
       - TASK: managed
+    flags:
+      - gke-loadbalancer
+
 
 # Create external loadBalancer entrypoint for test service
   - name: shipdemo-service-gke-test
@@ -30,6 +35,9 @@ jobs:
       - IN: shipdemo-service-test
       - IN: shipdemo-deploy-gke-test
       - TASK: managed
+    flags:
+      - gke-loadbalancer
+
 
 # # Create release for PROD
 #   - name: shipdemo-release-gke
@@ -41,6 +49,9 @@ jobs:
 #         switch: off
 #       - TASK:   managed
 #         bump: patch
+    flags:
+      - gke-loadbalancer
+
 
 # TEST deployment to Amazon ECS
   - name: shipdemo-deploy-gke-prod
@@ -53,6 +64,9 @@ jobs:
       - IN: shipdemo-replicas-gke-prod
       - IN: shipdemo-cluster-gke
       - TASK: managed
+    flags:
+      - gke-loadbalancer
+
 
 # Create external loadBalancer entrypoint for prod service
   - name: shipdemo-service-gke-prod
@@ -61,3 +75,5 @@ jobs:
       - IN: shipdemo-service-prod
       - IN: shipdemo-deploy-gke-prod
       - TASK: managed
+    flags:
+      - gke-loadbalancer

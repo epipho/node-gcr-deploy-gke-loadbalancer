@@ -14,6 +14,8 @@ resources:
       sourceName : "shippable-demo" # replace with your GKE cluster name
       region: us-east1-b
       namespace: "shippable-gke" # replace with your Google Cloud project name
+    flags:
+      - gke-loadbalancer
 
 ################################
 
@@ -26,6 +28,8 @@ resources:
       isPull: false
     seed:
       versionName: master.1
+    flags:
+      - gke-loadbalancer
 
 ################################
 
@@ -43,6 +47,8 @@ resources:
       labels:
         app: shipdemo-node-gcr-deploy-gke-loadbalancer
         env: test
+    flags:
+      - gke-loadbalancer
 
 # env vars for Test
   - name: shipdemo-params-gke-test
@@ -51,6 +57,8 @@ resources:
       params:
         ENVIRONMENT: "TEST"
         PORT: 80
+    flags:
+      - gke-loadbalancer
 
 # GKE service/load balancer for TEST
   - name: shipdemo-service-test
@@ -70,6 +78,8 @@ resources:
       selector:
         app: shipdemo-node-gcr-deploy-gke-loadbalancer
         env: test
+    flags:
+      - gke-loadbalancer
 
 ################################
 
@@ -78,6 +88,8 @@ resources:
     type: version
     seed:
       versionName: "1.0.0"
+    flags:
+      - gke-loadbalancer
 
 ################################
 
@@ -92,6 +104,8 @@ resources:
       labels:
         env: prod
         app: sample-node-ayeaye
+    flags:
+      - gke-loadbalancer
 
 # env vars for Prod
   - name: params-sample-prod-gke
@@ -100,6 +114,8 @@ resources:
       params:
         ENVIRONMENT: "PROD"
         PORT: 80
+    flags:
+      - gke-loadbalancer
 
 # GKE service/load balancer for PROD 
   - name: shipdemo-service-prod
@@ -119,11 +135,15 @@ resources:
       selector:
         app: shipdemo-node-gcr-deploy-gke-loadbalancer
         env: prod
+    flags:
+      - gke-loadbalancer
 
 # PROD replicas
   - name: shipdemo-replicas-gke-prod
     type: replicas
     version:
       count: 2
+    flags:
+      - gke-loadbalancer
 
 # ################################
