@@ -1,0 +1,63 @@
+jobs:
+
+# jobs for the sample node app pipeline from CI thru TEST environment
+
+################################
+
+# add pipeline workflow
+
+# manifest gen for VISUALIZER
+  - name: shipdemo-manifest-gke
+    type: manifest
+    steps:
+      - IN: shipdemo-img-gcr
+      - IN: shipdemo-img-options-gke-test
+      - TASK: managed
+
+# TEST deployment to Amazon ECS
+  - shipdemo-deploy-gke-test
+    type: deploy
+    steps:
+      - IN: shipdemo-manifest-gke
+      - IN: shipdemo-params-gke-test
+      - IN: shipdemo-cluster-gke
+      - TASK: managed
+
+# Create external loadBalancer entrypoint for test service
+  - name: shipdemo-service-gke-test
+    type: provision
+    steps:
+      - IN: shipdemo-service-test
+      - IN: shipdemo-deploy-gke-test
+      - TASK: managed
+
+# # Create release for PROD
+#   - name: shipdemo-release-gke
+#     type: release
+#     steps:
+#       - IN: shipdemo-version-gke
+#         switch: off
+#       - IN: shipdemo-deploy-gke-test
+#         switch: off
+#       - TASK:   managed
+#         bump: patch
+
+# TEST deployment to Amazon ECS
+  - name: shipdemo-deploy-gke-prod
+    type: deploy
+    steps:
+      - IN: shipdemo-deploy-gke-test
+        switch: off
+      - IN: shipdemo-params-gke-prod
+      - IN: shipdemo-img-options-gke-prod
+      - IN: shipdemo-replicas-gke-prod
+      - IN: shipdemo-cluster-gke
+      - TASK: managed
+
+# Create external loadBalancer entrypoint for prod service
+  - name: shipdemo-service-gke-prod
+    type: provision
+    steps:
+      - IN: shipdemo-service-prod
+      - IN: shipdemo-deploy-gke-prod
+      - TASK: managed

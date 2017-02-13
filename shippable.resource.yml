@@ -1,0 +1,129 @@
+resources:
+
+# resources for the box demo pipelines from CI thru TEST environment
+
+################################
+
+# add infrastructure resources
+
+# add env - GKE cluster TEST
+  - name: shipdemo-cluster-gke
+    type: cluster
+    integration: ttrahan-gke # replace with your GKE integration name
+    pointer:
+      sourceName : "shippable-demo" # replace with your GKE cluster name
+      region: us-east1-b
+      namespace: "shippable-gke" # replace with your Google Cloud project name
+
+################################
+
+# Docker Image
+  - name: shipdemo-img-gcr
+    type: image
+    integration: ttrahan-gcr # replace with your GCR integration name
+    pointer:
+      sourceName: gcr.io/shippable-gke/node-gcr-deploy-gke-loadbalancer # replace namespace name with your Google Cloud project name
+      isPull: false
+    seed:
+      versionName: master.1
+
+################################
+
+# TEST resources
+
+# Docker Image Options
+  - name: shipdemo-img-options-gke-test
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 128
+      portMappings:
+        - 80:80
+      publishAllPorts : true
+      labels:
+        app: shipdemo-node-gcr-deploy-gke-loadbalancer
+        env: test
+
+# env vars for Test
+  - name: shipdemo-params-gke-test
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "TEST"
+        PORT: 80
+
+# GKE service/load balancer for TEST
+  - name: shipdemo-service-test
+    type: loadBalancer
+    integration: ttrahan-gke # replace with your GKE integration name
+    pointer:
+      sourceName: "shipdemo-service-test"
+      method: LoadBalancer
+      clusterName: shippable-demo # replace with your GKE cluster name
+      region: "us-east1" # replace with your GKE cluster region
+      namespace: shippable-gke # replace with your Google Cloud project name
+    version:
+      ports:
+        - name: public
+          protocol: TCP
+          port: 80
+      selector:
+        app: shipdemo-node-gcr-deploy-gke-loadbalancer
+        env: test
+
+################################
+
+# set service version seed
+  - name: shipdemo-version-gke
+    type: version
+    seed:
+      versionName: "1.0.0"
+
+################################
+
+# PROD resources
+
+# Docker Image Options
+  - name: img-opts-sample-prod-gke
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 128
+      labels:
+        env: prod
+        app: sample-node-ayeaye
+
+# env vars for Prod
+  - name: params-sample-prod-gke
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "PROD"
+        PORT: 80
+
+# GKE service/load balancer for PROD 
+  - name: shipdemo-service-prod
+    type: loadBalancer
+    integration: ttrahan-gke # replace with your GKE integration name
+    pointer:
+      sourceName: "shipdemo-service-prod"
+      method: LoadBalancer
+      clusterName: shippable-demo # replace with your GKE cluster name
+      region: "us-east1" # replace with your GKE cluster region
+      namespace: shippable-gke # replace with your Google Cloud project name
+    version:
+      ports:
+        - name: public
+          protocol: TCP
+          port: 80
+      selector:
+        app: shipdemo-node-gcr-deploy-gke-loadbalancer
+        env: prod
+
+# PROD replicas
+  - name: shipdemo-replicas-gke-prod
+    type: replicas
+    version:
+      count: 2
+
+# ################################
