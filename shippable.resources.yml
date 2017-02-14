@@ -68,7 +68,7 @@ resources:
       sourceName: "shipdemo-service-test"
       method: LoadBalancer
       clusterName: shippable-demo # replace with your GKE cluster name
-      region: "us-east1" # replace with your GKE cluster region
+      region: "us-east1-b" # replace with your GKE cluster region
       namespace: shippable-gke # replace with your Google Cloud project name
     version:
       ports:
