@@ -40,16 +40,12 @@ This repo demonstrates the following features:
 Your end-to-end pipeline is complete! Now, any change you make to the application will be deployed to your GKE TEST environment and be ready to manually deploy to your PROD environment, as well.
 
 ### CI console screenshot
-![CI Console Log](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-kubectl-ci-console.png)
+![CI Console Log](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-gke-loadbalancer-CI.png)
 
 ### GCR integration screenshot
-![Integration View](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-int-kube.png)
+![Integration View](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-gke-loadbalancer-GCR.png)
 
-### GKE integration screenshot
-![Integration View](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-int-kube.png)
-
-### CD Pipeline SPOG screenshot
-![CD Pipeline](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-kubectl-deploy.png)
+![CD Pipeline](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-gke-loadbalancer-CD.png)
 
 #### Launch a Kubernetes cluster for this demo
 
