@@ -47,10 +47,10 @@ jobs:
 #         switch: off
 #       - TASK:   managed
 #         bump: patch
-    flags:
-      - gke-loadbalancer
+#   flags:
+#     - gke-loadbalancer
 
-# TEST deployment to Google GKE
+# PROD deployment to Google GKE
   - name: shipdemo-deploy-gke-prod
     type: deploy
     steps:
