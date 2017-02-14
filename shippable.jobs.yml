@@ -16,7 +16,7 @@ jobs:
     flags:
       - gke-loadbalancer
 
-# TEST deployment to Amazon ECS
+# TEST deployment to Google GKE
   - shipdemo-deploy-gke-test
     type: deploy
     steps:
@@ -53,7 +53,7 @@ jobs:
       - gke-loadbalancer
 
 
-# TEST deployment to Amazon ECS
+# TEST deployment to Google GKE
   - name: shipdemo-deploy-gke-prod
     type: deploy
     steps:

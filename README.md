@@ -42,8 +42,11 @@ Your end-to-end pipeline is complete! Now, any change you make to the applicatio
 ### CI console screenshot
 ![CI Console Log](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-kubectl-ci-console.png)
 
-### Kubernetes integration screenshot
-![CI Integration View](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-int-kube.png)
+### GCR integration screenshot
+![Integration View](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-int-kube.png)
+
+### GKE integration screenshot
+![Integration View](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-int-kube.png)
 
 ### CD Pipeline SPOG screenshot
 ![CD Pipeline](https://github.com/shippableSamples/node-dockerhub-runsh-kubernetes-kubectl/blob/master/public/resources/images/shipdemo-kubectl-deploy.png)
