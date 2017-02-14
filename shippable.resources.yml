@@ -20,7 +20,7 @@ resources:
 ################################
 
 # Docker Image
-  - name: shipdemo-img-gcr
+  - name: shipdemo-img-gke
     type: image
     integration: ttrahan-gcr # replace with your GCR integration name
     pointer:

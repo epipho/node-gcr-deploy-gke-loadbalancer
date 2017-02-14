@@ -10,7 +10,7 @@ jobs:
   - name: shipdemo-manifest-gke
     type: manifest
     steps:
-      - IN: shipdemo-img-gcr
+      - IN: shipdemo-img-gke
       - IN: shipdemo-img-options-gke-test
       - TASK: managed
     flags:
