@@ -17,7 +17,7 @@ jobs:
       - gke-loadbalancer
 
 # TEST deployment to Google GKE
-  - shipdemo-deploy-gke-test
+  - name: shipdemo-deploy-gke-test
     type: deploy
     steps:
       - IN: shipdemo-manifest-gke
