@@ -27,7 +27,6 @@ jobs:
     flags:
       - gke-loadbalancer
 
-
 # Create external loadBalancer entrypoint for test service
   - name: shipdemo-service-gke-test
     type: provision
@@ -37,7 +36,6 @@ jobs:
       - TASK: managed
     flags:
       - gke-loadbalancer
-
 
 # # Create release for PROD
 #   - name: shipdemo-release-gke
@@ -52,7 +50,6 @@ jobs:
     flags:
       - gke-loadbalancer
 
-
 # TEST deployment to Google GKE
   - name: shipdemo-deploy-gke-prod
     type: deploy
@@ -66,7 +63,6 @@ jobs:
       - TASK: managed
     flags:
       - gke-loadbalancer
-
 
 # Create external loadBalancer entrypoint for prod service
   - name: shipdemo-service-gke-prod
