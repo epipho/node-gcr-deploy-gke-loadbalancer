@@ -96,7 +96,7 @@ resources:
 # PROD resources
 
 # Docker Image Options
-  - name: img-opts-sample-prod-gke
+  - name: shipdemo-img-options-gke-prod
     type: dockerOptions
     version:
       memory: 64
@@ -108,7 +108,7 @@ resources:
       - gke-loadbalancer
 
 # env vars for Prod
-  - name: params-sample-prod-gke
+  - name: shipdemo-params-gke-prod
     type: params
     version:
       params:
