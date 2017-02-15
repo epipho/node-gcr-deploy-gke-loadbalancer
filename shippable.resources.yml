@@ -44,7 +44,7 @@ resources:
       portMappings:
         - 80:80
       publishAllPorts : true
-      labels:
+      labels:   # these labels will be used by the loadBalancer resource
         app: shipdemo-node-gcr-deploy-gke-loadbalancer
         env: test
     flags:
@@ -75,7 +75,7 @@ resources:
         - name: public
           protocol: TCP
           port: 80
-      selector:
+      selector:  # these must match labels set on your image (see dockerOptions)
         app: shipdemo-node-gcr-deploy-gke-loadbalancer
         env: test
     flags:
@@ -101,9 +101,9 @@ resources:
     version:
       memory: 64
       cpuShares: 128
-      labels:
+      labels: # these labels will be used by the loadBalancer resource
+        app: shipdemo-node-gcr-deploy-gke-loadbalancer
         env: prod
-        app: sample-node-ayeaye
     flags:
       - gke-loadbalancer
 
@@ -132,7 +132,7 @@ resources:
         - name: public
           protocol: TCP
           port: 80
-      selector:
+      selector:   # these must match labels set on your image (see dockerOptions)
         app: shipdemo-node-gcr-deploy-gke-loadbalancer
         env: prod
     flags:
