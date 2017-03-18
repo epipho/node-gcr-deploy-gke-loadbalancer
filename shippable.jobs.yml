@@ -16,7 +16,7 @@ jobs:
     flags:
       - gke-loadbalancer
 
-  - name: node-gcr-deploy-gke-loadbalancer_runCI
+  - name: node-gcr-deploy-gke-loadbalancer_ciRepo
     type: runCI
     steps:
       - OUT: shipdemo-img-gk
