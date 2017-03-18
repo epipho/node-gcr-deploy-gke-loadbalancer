@@ -33,6 +33,7 @@ build:
   post_ci:
     - docker build -t $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER .
     - docker push $DOCKER_ACC/$DOCKER_REPO:$BRANCH.$BUILD_NUMBER
+    - echo "versionName=$BRANCH.$BUILD_NUMBER" >> $JOB_STATE/shipdemo-img-gke.env
 
 # Integrations are used to connect external resources to CI
 # http://docs.shippable.com/integrations/overview/
@@ -43,26 +44,3 @@ integrations:
     - integrationName: gcr # replace with your Docker Hub integration name
       type: gcr
 
-  # http://docs.shippable.com/ci/shippableyml/#notifications
-  notifications:
-    # turns off email for PR builds, notifies only on failure or change in status
-    # http://docs.shippable.com/integrations/notifications/email/
-    - integrationName: email
-      type: email
-      on_success: change
-      on_failure: always
-      on_pull_request: never
-
-    # Sending webhook to notify Shippable pipeline of new image tag available 
-    # http://docs.shippable.com/tutorials/pipelines/connectingCiPipelines/
-    # UNCOMMENT LINES BELOW THIS AFTER ADDING PIPELINE TO SPOG VIEW 
-    - integrationName: shipdemo-trigger-img-gke
-      type: webhook
-      payload:
-        - versionName=$BRANCH.$BUILD_NUMBER
-      branches:
-        only:
-          - master
-      on_success: always
-      on_failure: never
-      on_start: never
