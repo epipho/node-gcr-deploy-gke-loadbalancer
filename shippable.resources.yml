@@ -9,11 +9,11 @@ resources:
 # add env - GKE cluster TEST
   - name: shipdemo-cluster-gke
     type: cluster
-    integration: ttrahan-gke # replace with your GKE integration name
+    integration: gke # replace with your GKE integration name
     pointer:
-      sourceName : "shippable-demo" # replace with your GKE cluster name
-      region: us-east1-b
-      namespace: "shippable-gke" # replace with your Google Cloud project name
+      sourceName: "rocks-prod"
+      region: "us-central1-a"
+      namespace: "rocks-161900"
     flags:
       - gke-loadbalancer
 
@@ -22,9 +22,9 @@ resources:
 # Docker Image
   - name: shipdemo-img-gke
     type: image
-    integration: ttrahan-gcr # replace with your GCR integration name
+    integration: gcr # replace with your GCR integration name
     pointer:
-      sourceName: gcr.io/shippable-gke/node-gcr-deploy-gke-loadbalancer # replace namespace name with your Google Cloud project name
+      sourceName: gcr.io/rocks-161900/test-app # replace namespace name with your Google Cloud project name
       isPull: false
     seed:
       versionName: master.1
@@ -67,9 +67,9 @@ resources:
     pointer:
       sourceName: "shipdemo-service-test"
       method: LoadBalancer
-      clusterName: shippable-demo # replace with your GKE cluster name
-      region: "us-east1-b" # replace with your GKE cluster region
-      namespace: shippable-gke # replace with your Google Cloud project name
+      sourceName: "rocks-prod"
+      region: "us-central1-a"
+      namespace: "rocks-161900"
     version:
       ports:
         - name: public
@@ -82,68 +82,3 @@ resources:
       - gke-loadbalancer
 
 ################################
-
-# set service version seed
-  - name: shipdemo-version-gke
-    type: version
-    seed:
-      versionName: "1.0.0"
-    flags:
-      - gke-loadbalancer
-
-################################
-
-# PROD resources
-
-# Docker Image Options
-  - name: shipdemo-img-options-gke-prod
-    type: dockerOptions
-    version:
-      memory: 64
-      cpuShares: 128
-      labels: # these labels will be used by the loadBalancer resource
-        app: shipdemo-node-gcr-deploy-gke-loadbalancer
-        env: prod
-    flags:
-      - gke-loadbalancer
-
-# env vars for Prod
-  - name: shipdemo-params-gke-prod
-    type: params
-    version:
-      params:
-        ENVIRONMENT: "PROD"
-        PORT: 80
-    flags:
-      - gke-loadbalancer
-
-# GKE service/load balancer for PROD 
-  - name: shipdemo-service-prod
-    type: loadBalancer
-    integration: ttrahan-gke # replace with your GKE integration name
-    pointer:
-      sourceName: "shipdemo-service-prod"
-      method: LoadBalancer
-      clusterName: shippable-demo # replace with your GKE cluster name
-      region: "us-east1-b" # replace with your GKE cluster region
-      namespace: shippable-gke # replace with your Google Cloud project name
-    version:
-      ports:
-        - name: public
-          protocol: TCP
-          port: 80
-      selector:   # these must match labels set on your image (see dockerOptions)
-        app: shipdemo-node-gcr-deploy-gke-loadbalancer
-        env: prod
-    flags:
-      - gke-loadbalancer
-
-# PROD replicas
-  - name: shipdemo-replicas-gke-prod
-    type: replicas
-    version:
-      count: 2
-    flags:
-      - gke-loadbalancer
-
-# ################################

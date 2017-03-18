@@ -15,8 +15,8 @@ env:
     - CODE_COVERAGE_DIR=$SHIPPABLE_REPO_DIR/shippable/codecoverage
     - TESTS_LOC_DIR=$SHIPPABLE_REPO_DIR/tests
     - MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin/
-    - DOCKER_REPO=node-gcr-deploy-gke-loadbalancer
-    - DOCKER_ACC=gcr.io/shippable-gke # gcr.io/{Google Cloud project name}
+    - DOCKER_REPO=test-app
+    - DOCKER_ACC=gcr.io/rocks-161900 # gcr.io/{Google Cloud project name}
 
 build:
   ci:
@@ -40,7 +40,7 @@ integrations:
 # adding docker hub integration so that credentials are available to CI Job
 # http://docs.shippable.com/integrations/imageRegistries/dockerHub/
   hub:
-    - integrationName: ttrahan-gcr # replace with your Docker Hub integration name
+    - integrationName: gcr # replace with your Docker Hub integration name
       type: gcr
 
   # http://docs.shippable.com/ci/shippableyml/#notifications
