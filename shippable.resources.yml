@@ -65,7 +65,6 @@ resources:
     type: loadBalancer
     integration: gke # replace with your GKE integration name
     pointer:
-      sourceName: "shipdemo-service-test"
       method: LoadBalancer
       sourceName: "rocks-prod"
       region: "us-central1-a"
